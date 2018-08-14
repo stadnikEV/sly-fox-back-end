@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    body {
+      font: 11.5px 'Times New Roman';
+      margin: 0;
+      padding: 0;
+    }
+    .page {
+      margin: 0;
+      width: 593px;
+      height: 840px;
+      border: solid 1px white;
+      background-color: white;
+      z-index: 1;
+    }
+    .header-wriper {
+      margin-left: 100px;
+      margin-top: 20px;
+      width: 490px;
+      height: 128px;
+    }
+    .сhurch-container {
+      height: 128px;
+      display: inline-block;
+      width: 22%;
+      vertical-align: top;
+    }
+    .сhurch {
+      width: 107px;
+    }
+
+    .header-text {
+      padding-top: 30px;
+      display: inline-block;
+      width: 310px;
+      height: 124px;
+      margin-left: 15px;
+      vertical-align: top;
+      text-align: center;
+      box-sizing: border-box;
+      letter-spacing: 0px;
+      border-bottom: solid 1px black;
+      line-height: 15px;
+      word-spacing: 1px;
+    }
+    .data {
+      margin-left: 80px;
+      padding-left: 20px;
+      padding-right: 25px;
+      text-align: center;
+      width: 459px;
+      height: 80px;
+      box-sizing: border-box;
+      font-size: 11.2px;
+      line-height: 12.7px;
+      border-bottom: solid 1px black;
+    }
+    .time {
+      margin-left: 80px;
+      height: 12px;
+      font-size: 12px;
+    }
+    .name {
+      margin-left: 80px;
+      margin-right: 30px;
+      padding-top: 3px;
+      padding-left: 10px;
+      width: 460px;
+      font-size: 12px;
+      text-align: center;
+    }
+    .text {
+      margin-left: 69px;
+      margin-right: 30px;
+      width: 460px;
+      font-size: 12px;
+      text-align: justify;
+      line-height: 110%;
+    }
+    .footer {
+      position: absolute;
+      margin-left: 69px;
+      margin-top: 33px;
+      z-index: 10;
+    }
+    .stamp {
+      position: absolute;
+      top: 688px;
+      left: 435px;
+      width: 150px;
+    }
+    .signature {
+      position: absolute;
+      top: 724px;
+      left: 106px;
+      width: 292px;
+      z-index: 2;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="header-wriper">
+      <div class="сhurch-container">
+        <img class="сhurch" src="images/церковь.jpg" alt="церковь" width="200px">
+      </div>
+      <div class="header-text">
+        МЕСТНАЯ РЕЛИГИОЗНАЯ ОРГАНИЗАЦИЯ </br> ПРАВОСЛАВНЫЙ  ПРИХОД</br>
+    ТРОИЦКОЙ ЦЕРКВИ С. КОНСТАНТИНОВКА</br> ПЕНЗЕНСКОГО РАЙОНА ПЕНЗЕНСКОЙ ОБЛАСТИ</br> ПЕНЗЕНСКОЙ ЕПАРХИИ РУССКОЙ ПРАВОСЛАВНОЙ</br> ЦЕРКВИ (МОСКОВСКИЙ  ПАТРИАРХАТ)</br>
+      </div>
+    </div>
+      <div class="data">
+        440516, Пензенская область Пензенский район, с. Константиновка, ул. Рабочая, 79А</br>
+ИНН 5829900034   КПП 582901001   ОГРН 1115800002504</br>
+р/с 40703810500010000241  ПАО Банк «Кузнецкий» г. Пенза БИК 045655707</br>
+корр/счет 30101810200000000707</br>
+Карта Сбербанк 5469530012031018</br>
+www.hram-konstantinovka.ru
+      </div>
+      <div class="time">
+         14. 08. 2018г.
+      </div>
+      <div class="name">
+        <%=gender %> <%=firstName %> <%=middleName%>!
+      </div>
+      <div class="text">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;В селе Константиновка Пензенского района положено начало восстановлению
+          жемчужины Пензенской области - Храма Живоначальной Троицы.  Всё даётся с трудом.
+          У нас нет больших помощников и благотворителей, практически все восстановительные
+          работы мы выполняем сами, и уже можно воочию увидеть, как преобразился храм за эти
+          два года. Сегодня при храме работают две Воскресные школы, количество
+          воспитанников увеличилось до 42 человек. Всех деток мы бесплатно обеспечиваем
+          необходимыми канцелярскими товарами для занятий. Я уверен, Вы сами знаете,
+          насколько сейчас это сложно для сельского храма.</br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>У нас радость!</b> Нам предоставили 8 соток земли (20*40 м, 800 м.кв.). На этой земле
+          мы подготовили место для детской площадки. Зимой будет работать каток, кто-то
+          впервые сумеет перебороть свой страх, освоит первые уроки и прочувствует радость
+          полета на льду. Даст Бог - соберем хоккейную команду. Летом – волейбол и баскетбол.
+          На много &nbsp;километров &nbsp;от нас нет &nbsp;ничего подобного! &nbsp;Мы сможем &nbsp;заниматься и с детьми</br>
+          соседних сёл.</br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;В&nbsp; настоящее &nbsp;&nbsp;время &nbsp;мы&nbsp; подготовили &nbsp;&nbsp;площадку, &nbsp;засыпали &nbsp;щебнем.&nbsp;&nbsp; Теперь
+          необходимо залить её асфальтом и сделать борта. Общая стоимость работ – 328 000
+          рублей. Одному сельскому приходу очень тяжело собрать такую сумму.</br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Если у Вас есть возможность, пожалуйста, окажите <b>ЛЮБУЮ</b> посильную помощь.
+          Если перевести на метры, то <b>стоимость одного квадратного метра катка – 410 рублей</b>
+          (необходимо 800 квадратных метров).</br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Нам очень тяжело  находить&nbsp; необходимые средства для восстановления храма, и,
+          может показаться, что площадка для детей – это лишнее. Но если мы сейчас не будем
+          заниматься детьми, то для кого восстанавливать святыни? Сегодня очень нужно отвлечь
+          (хотя бы немного!) деток от «гаджетов» и интернета.</br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Господь, отвечая на вопрос учеников о признаках приближающегося конца времён,
+          говорит: «…когда восстанут дети на родителей» (Мф.10). А ведь это может быть очень
+          скоро, если никто не будет ими заниматься.</br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Имя каждого &nbsp;благотворителя будет &nbsp;обязательно выгравировано на золотой
+          памятной табличке и занесено в храмовый синодик для вечного поминовения.</b></br>
+          Храни Вас Бог!
+      </div>
+      <div class="footer">
+        Настоятель Троицкого храма с. Константиновка,</br>
+        председатель Приходского совета, </br>
+        священник Сергий Иванов</br>
+        тел.: +7 (937) 409-90-01
+      </div>
+      <img src="images/печать.png" alt="stamp" class="stamp">
+      <img src="images/подпись.png" alt="stamp" class="signature">
+  </div>
+</body>
+</html>
