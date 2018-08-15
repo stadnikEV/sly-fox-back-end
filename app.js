@@ -6,6 +6,8 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const createData = require('./libs/create-data.js');
 const Emitter = require("events");
+const renderPdf = require('./libs/render-pdf.js');
+const removeFile = require('./libs/remove-file.js');
 
 const app = express();
 app.set('port', 8080);
@@ -35,12 +37,14 @@ app.post('/application', (req, res) => {
   const onResponse = (responseData) => {
     res.json(responseData);
     emitter.removeListener('responseData', onResponse);
-    isPanding = false;
   }
   emitter.on('responseData', onResponse);
 });
 
 
+
+let lastFileNamePath = '';
+let botrixData = null;
 
 app.post('/bitrix', (req, res) => {
   const onRequest = (reguestData) => {
@@ -54,6 +58,17 @@ app.post('/bitrix', (req, res) => {
     return;
   }
   createData({ req, emitter })
+    .then((data) => {
+      botrixData = data;
+      return removeFile({ path: lastFileNamePath });
+    })
+    .then(() => {
+      return renderPdf(botrixData);
+    })
+    .then((fileName) => {
+      lastFileNamePath = fileName;
+      isPanding = false;
+    })
 });
 
 
