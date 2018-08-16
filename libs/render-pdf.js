@@ -14,7 +14,19 @@ const renderPdf = ({
   middleNameGenitive,
 }) => {
   return new Promise((resolve, reject) => {
+    const date = new Date();
+
+    const getDateFormat = (value) => {
+      if (value > 9) {
+        return value;
+      }
+      return '0' + value;
+    }
+
     ejs.renderFile('templates/pdf.html', { // получение html для pdf
+      day: getDateFormat(date.getDate()),
+      month: getDateFormat(date.getMonth() + 1),
+      year: date.getFullYear(),
       gender,
       firstName,
       middleName,

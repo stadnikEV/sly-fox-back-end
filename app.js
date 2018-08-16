@@ -26,6 +26,7 @@ app.use((req, res, next) => {
 
 
 let isPanding = false;
+let notCreatePDF = false;
 
 app.post('/application', (req, res) => {
   if (isPanding) {
@@ -33,8 +34,10 @@ app.post('/application', (req, res) => {
     return;
   }
   isPanding = true;
+  notCreatePDF = req.body.notCreatePDF;
   emitter.emit('reguestData', req.body);
   const onResponse = (responseData) => {
+    console.log(isPanding);
     res.json(responseData);
     emitter.removeListener('responseData', onResponse);
   }
@@ -55,6 +58,8 @@ app.post('/bitrix', (req, res) => {
   emitter.on('reguestData', onRequest);
 
   if (req.body.empty) {
+    emitter.emit('responseData', {});
+    isPanding = false;
     return;
   }
   createData({ req, emitter })
@@ -63,6 +68,9 @@ app.post('/bitrix', (req, res) => {
       return removeFile({ path: lastFileNamePath });
     })
     .then(() => {
+      if (notCreatePDF) {
+        return '';
+      }
       return renderPdf(botrixData);
     })
     .then((fileName) => {

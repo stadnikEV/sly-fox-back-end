@@ -53,7 +53,6 @@ const createData = ({ req, emitter }) => {
             body,
           }
         };
-        console.log(dataBitrix);
         emitter.emit('responseData', dataBitrix);
         resolve({
           gender,
