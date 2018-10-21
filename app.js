@@ -10,7 +10,7 @@ const renderPdf = require('./libs/render-pdf.js');
 const removeFile = require('./libs/remove-file.js');
 
 const app = express();
-app.set('port', 8080);
+app.set('port', 3000);
 app.set('views', path.join(__dirname, 'pdf.html'));
 app.set('view engine', 'ejs');
 app.use(morgan('tiny')); // логирование запросов с клиента в консоль
@@ -23,7 +23,6 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Headers', 'Content-Type, X-Requested-With');
   next();
 });
-
 
 let isPanding = false;
 let notCreatePDF = false;
@@ -80,6 +79,6 @@ app.post('/bitrix', (req, res) => {
 });
 
 
-http.createServer(app).listen(8080, () => {
-  logger.info('Express server listening on port ' + 8080);
+http.createServer(app).listen(3000, () => {
+  logger.info('Express server listening on port ' + 3000);
 });

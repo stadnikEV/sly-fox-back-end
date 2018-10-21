@@ -6,6 +6,8 @@ const getThemeText = require('../templates/get-theme-text.js');
 
 const createData = ({ req, emitter }) => {
   return new Promise ((resolve) => {
+    const comment = req.body.comment;
+    const id = req.body.id;
     const firstName = req.body.name[1];
     const middleName = req.body.name[2];
     const email = req.body.email;
@@ -41,6 +43,8 @@ const createData = ({ req, emitter }) => {
           middleNameGenitive,
         });
         const dataBitrix = {
+          comment,
+          id,
           firstName,
           middleName,
           index,
