@@ -8,6 +8,7 @@ const createData = require('./libs/create-data.js');
 const Emitter = require("events");
 const renderPdf = require('./libs/render-pdf.js');
 const removeFile = require('./libs/remove-file.js');
+const changeImages = require('./libs/change-images.js');
 
 const app = express();
 app.set('port', 3000);
@@ -77,6 +78,24 @@ app.post('/bitrix', (req, res) => {
       isPanding = false;
     })
 });
+
+
+app.put('/img', (req, res) => {
+
+  changeImages(req.body)
+    .then(() => {
+      res.json({});
+    })
+    .catch((e) => {
+      console.log(e);
+      res.status(500);
+      res.json({});
+    });
+});
+
+
+
+app.use(express.static('templates'));
 
 
 http.createServer(app).listen(3000, () => {
