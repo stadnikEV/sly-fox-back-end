@@ -46,7 +46,7 @@ const renderPdf = ({
       const regExp = new RegExp('src="', 'g');
       let renderHtml = html.replace(/<script src="js\/create-pdf.js"><\/script>/g, '');
       renderHtml = renderHtml.replace(regExp, 'src="file://localhost' + appDir + "/templates/"); // замена src на абсолютный путь
-      console.log(renderHtml);
+
       htmlPdf.create(renderHtml, options).toFile(fileName, (err) => { // создание и сохранение pdf
         if (err) {
           console.log('Ошибка конвертации pdf');

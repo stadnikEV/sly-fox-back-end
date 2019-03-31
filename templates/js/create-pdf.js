@@ -2,29 +2,24 @@
 
 
 const page = document.querySelector('.page');
-page.style.backgroundColor = "rgba(255, 255, 255, 0.5)";
-
 const stamp = document.querySelector('.stamp');
-stamp.style.opacity = "0.5";
-
 const signature = document.querySelector('.signature');
+page.style.display = "none";
+page.style.zIndex = "2";
+page.style.position = 'relative';
+page.style.backgroundColor = "rgba(255, 255, 255, 0)";
+stamp.style.opacity = "0.5";
 signature.style.opacity = "0.5";
 
-const headerText = document.querySelector('.header-text');
-// headerText.style.opacity = "0";
 
-const data = document.querySelector('.data');
-// data.style.opacity = "0";
+const background = document.createElement('img');
+background.style.width = '595px';
+background.classList.add('background');
+background.style.position = 'absolute';
+background.style.top = '-2px';
+background.src = 'http://localhost:3000/images/pdf.jpg';
+document.body.prepend(background);
 
-const text = document.querySelector('.text');
-// text.style.opacity = "0";
-
-const footer = document.querySelector('.footer');
-// footer.style.filter = "opacity(25%)";
-
-document.body.style.backgroundImage = "url('http://localhost:3000/images/pdf.jpg')";
-document.body.style.backgroundSize = "595px";
-document.body.style.backgroundRepeat = "no-repeat";
 
 const rotateDegree = (elem) => {
     const matrix = getComputedStyle(elem).getPropertyValue('transform');
@@ -51,6 +46,9 @@ const defaultPos = {
     width: parseInt(getComputedStyle(signature).width),
     rotate: rotateDegree(signature),
   },
+  background: {
+    top: parseInt(getComputedStyle(background).top),
+  },
 }
 
 let activeElem = null;
@@ -59,11 +57,11 @@ let activeElem = null;
 const move = (e) => {
   e.preventDefault();
 
-  if (e.keyCode === 39) {
+  if (e.keyCode === 39 && activeElem !== background) {
     activeElem.style.left = `${parseInt(getComputedStyle(activeElem).left) + 1}px`;
     return;
   }
-  if (e.keyCode === 37) {
+  if (e.keyCode === 37 && activeElem !== background) {
     activeElem.style.left = `${parseInt(getComputedStyle(activeElem).left) - 1}px`;
     return;
   }
@@ -75,30 +73,32 @@ const move = (e) => {
     activeElem.style.top = `${parseInt(getComputedStyle(activeElem).top) + 1}px`;
     return;
   }
-  if (e.keyCode === 187 && !e.shiftKey) {
+  if (e.keyCode === 187 && !e.shiftKey && activeElem !== background) {
     activeElem.style.width = `${parseInt(getComputedStyle(activeElem).width) + 1}px`;
     return;
   }
-  if (e.keyCode === 189 & !e.shiftKey) {
+  if (e.keyCode === 189 & !e.shiftKey && activeElem !== background) {
     activeElem.style.width = `${parseInt(getComputedStyle(activeElem).width) - 1}px`;
     return;
   }
-  if (e.keyCode === 187 && e.shiftKey) {
+  if (e.keyCode === 187 && e.shiftKey && activeElem !== background) {
     const currentRotate = rotateDegree(activeElem);
     activeElem.style.transform = `rotate(${currentRotate + 1}deg)`;
     return;
   }
-  if (e.keyCode === 189 && e.shiftKey) {
+  if (e.keyCode === 189 && e.shiftKey && activeElem !== background) {
     const currentRotate = rotateDegree(activeElem);
     activeElem.style.transform = `rotate(${currentRotate - 1}deg)`;
     return;
   }
+
 }
 
 const focus = (elem) => {
   if (activeElem !== null) {
     return;
   }
+
   activeElem = elem;
   elem.style.border = "solid 1px gray";
   elem.style.left = `${parseInt(getComputedStyle(elem).left) - 1}px`;
@@ -115,16 +115,34 @@ const blur = () => {
   activeElem.style.top = `${parseInt(getComputedStyle(activeElem).top) + 1}px`;
   document.removeEventListener('keydown', move);
 
-  const imgName = (activeElem === stamp)
-    ? 'stamp'
-    : 'signature';
+  let imgName = null;
 
-  const newPosition = {
-    left: parseInt(getComputedStyle(activeElem).left),
-    top: parseInt(getComputedStyle(activeElem).top),
-    width: parseInt(getComputedStyle(activeElem).width),
-    rotate: rotateDegree(activeElem),
+  switch(activeElem) {
+    case stamp:
+      imgName = 'stamp';
+      break;
+    case signature:
+      imgName = 'signature';
+      break;
+    case background:
+      imgName = 'background';
+      break;
   }
+
+  if (!imgName) {
+    return;
+  }
+
+  const newPosition = (imgName !== 'background')
+    ? {
+        left: parseInt(getComputedStyle(activeElem).left),
+        top: parseInt(getComputedStyle(activeElem).top),
+        width: parseInt(getComputedStyle(activeElem).width),
+        rotate: rotateDegree(activeElem),
+      }
+    : {
+        top: parseInt(getComputedStyle(activeElem).top),
+      }
 
   const data = {
     imgName,
@@ -132,7 +150,7 @@ const blur = () => {
     newPosition,
   }
 
-
+  console.log(data);
 
   fetch('http://localhost:3000/img', {
     method: 'put',
@@ -172,9 +190,29 @@ const blur = () => {
 document.addEventListener('click', (e) => {
   blur(e.target);
 
-  if (!e.target.matches('.stamp') && !e.target.matches('.signature')) {
+  if (!e.target.matches('.stamp') && !e.target.matches('.signature') && !e.target.matches('.background')) {
     return;
   }
 
   focus(e.target);
+});
+
+document.addEventListener('keypress', (e) => {
+  if (e.keyCode === 49) {
+    background.style.display = "block";
+    page.style.display = "none";
+    return;
+  }
+  if (e.keyCode === 50) {
+    background.style.display = "none";
+    page.style.opacity = 1;
+    page.style.display = "block";
+    return;
+  }
+  if (e.keyCode === 51) {
+    background.style.display = "block";
+    page.style.display = "block";
+    page.style.opacity = "0.8";
+    return;
+  }
 });
