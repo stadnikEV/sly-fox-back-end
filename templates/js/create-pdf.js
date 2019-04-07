@@ -16,7 +16,7 @@ const background = document.createElement('img');
 background.style.width = '595px';
 background.classList.add('background');
 background.style.position = 'absolute';
-background.style.top = '-2px';
+background.style.top = '-13px';
 background.src = 'http://localhost:3000/images/pdf.jpg';
 document.body.prepend(background);
 

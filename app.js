@@ -9,6 +9,8 @@ const Emitter = require("events");
 const renderPdf = require('./libs/render-pdf.js');
 const removeFile = require('./libs/remove-file.js');
 const changeImages = require('./libs/change-images.js');
+const createStatistics = require('./libs/create-statistics.js');
+const saveToTxt = require('./libs/save-to-txt.js');
 
 const app = express();
 app.set('port', 3000);
@@ -76,6 +78,17 @@ app.post('/bitrix', (req, res) => {
     .then((fileName) => {
       lastFileNamePath = fileName;
       isPanding = false;
+    })
+});
+
+app.post('/statistics', (req, res) => {
+  const statistics = createStatistics(req.body);
+  saveToTxt({ path: 'Статистика.txt', text: statistics })
+    .then(() => {
+      res.json({});
+    })
+    .catch((e) => {
+      console.log(e);
     })
 });
 
